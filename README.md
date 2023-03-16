@@ -9,7 +9,7 @@ Določeni podatki in informacije o privatnosti applikacije
 
 ## Donations :heart:
 Če želite prispevati k nadaljnemu razvoju aplikacije vas iskreno naprošam za donacije
-v vašemu primernem rangu. :coin:
+v vašemu primernem rangu. :coin: ahaha
 
 ## Author :raising_hand_man:
 Viktor Denac
