@@ -16,6 +16,7 @@ import com.example.razvojprogramskihsistemov.databinding.ActivityMainBinding
 import com.example.razvojprogramskihsistemov.ui.dashboard.DashboardFragment
 import com.example.razvojprogramskihsistemov.ui.home.HomeFragment
 import com.example.razvojprogramskihsistemov.ui.notifications.NotificationsFragment
+import com.example.razvojprogramskihsistemov.ui.user.UserFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home -> replaceFragment(HomeFragment(), it.title.toString())
                 R.id.nav_dashboard -> replaceFragment(DashboardFragment(), it.title.toString())
                 R.id.nav_notifications -> replaceFragment(NotificationsFragment(), it.title.toString())
+                R.id.nav_user -> replaceFragment(UserFragment(), it.title.toString())
                 R.id.nav_logout -> Toast.makeText(applicationContext, "Clicked Logout", Toast.LENGTH_SHORT).show()
                 R.id.nav_share -> Toast.makeText(applicationContext, "Clicked Share", Toast.LENGTH_SHORT).show()
                 R.id.nav_feedback -> Toast.makeText(applicationContext, "Clicked Feedback", Toast.LENGTH_SHORT).show()
