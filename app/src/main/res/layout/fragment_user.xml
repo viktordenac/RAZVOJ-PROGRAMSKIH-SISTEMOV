@@ -109,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@drawable/button_style"
-        android:text="@string/add_subject"
+        android:text="@string/add"
         app:layout_constraintEnd_toEndOf="@+id/edit_subject"
         app:layout_constraintTop_toBottomOf="@+id/edit_subject" />
 
@@ -118,9 +118,10 @@
         android:id="@+id/subjectRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
         app:layout_constraintEnd_toEndOf="@+id/text_subject_display"
         app:layout_constraintStart_toStartOf="@+id/text_subject_display"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_subject" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_subject" />
 
     <TextView
         android:id="@+id/text_subject_display"
@@ -128,7 +129,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:text=""
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -139,7 +139,7 @@
         android:id="@+id/btn_change_user"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="Change"
+        android:text="@string/change"
         app:layout_constraintEnd_toEndOf="@+id/edit_email"
         app:layout_constraintTop_toBottomOf="@+id/edit_email" />
 
