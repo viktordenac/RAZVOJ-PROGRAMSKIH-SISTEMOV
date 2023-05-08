@@ -1,5 +1,6 @@
 package com.example.razvojprogramskihsistemov
 
+import CalendarFragment
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_dashboard -> replaceFragment(DashboardFragment(), it.title.toString())
                 R.id.nav_notifications -> replaceFragment(NotificationsFragment(), it.title.toString())
                 R.id.nav_user -> replaceFragment(UserFragment(), it.title.toString())
+                R.id.nav_calendar -> replaceFragment(CalendarFragment(), it.title.toString())
                 R.id.nav_logout -> Toast.makeText(applicationContext, "Clicked Logout", Toast.LENGTH_SHORT).show()
                 R.id.nav_share -> Toast.makeText(applicationContext, "Clicked Share", Toast.LENGTH_SHORT).show()
                 R.id.nav_feedback -> Toast.makeText(applicationContext, "Clicked Feedback", Toast.LENGTH_SHORT).show()

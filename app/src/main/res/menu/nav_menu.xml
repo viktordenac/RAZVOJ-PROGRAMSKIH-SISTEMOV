@@ -25,6 +25,11 @@
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/user" />
 
+    <item
+        android:id="@+id/nav_calendar"
+        android:icon="@drawable/ic_baseline_calendar_month_24"
+        android:title="Calendar" />
+
     </group>
 
     <item android:title="Profile">

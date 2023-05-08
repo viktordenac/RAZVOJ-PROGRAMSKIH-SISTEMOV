@@ -28,4 +28,10 @@
         android:name="com.example.razvojprogramskihsistemov.ui.user.UserFragment"
         android:label="User"
         tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.razvojprogramskihsistemov.ui.calendar.CalendarFragment"
+        android:label="Calendar"
+        tools:layout="@layout/fragment_calendar" />
 </navigation>
