@@ -10,4 +10,10 @@
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
     <string name="submit">Submit</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!-- edit-dialog -->
+    <string name="note">Note:</string>
+    <string name="enter_note_hint">Enter note (optional)</string>
 </resources>

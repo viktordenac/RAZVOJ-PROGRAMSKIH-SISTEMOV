@@ -11,17 +11,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/schedule_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_your_schedule"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:background="@drawable/edittext_background"
-            android:textColorHint="#A0A0A0"
-            android:textColor="@android:color/black" />
-
         <TextView
             android:id="@+id/monday_textview"
             android:layout_width="match_parent"
