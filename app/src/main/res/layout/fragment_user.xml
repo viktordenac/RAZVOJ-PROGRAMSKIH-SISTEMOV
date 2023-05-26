@@ -107,7 +107,7 @@
     <Button
         android:id="@+id/btn_add_subject"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/button_style"
         android:text="@string/add"
         app:layout_constraintEnd_toEndOf="@+id/edit_subject"
@@ -138,7 +138,7 @@
     <Button
         android:id="@+id/btn_change_user"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/change"
         app:layout_constraintEnd_toEndOf="@+id/edit_email"
         app:layout_constraintTop_toBottomOf="@+id/edit_email" />

@@ -1,6 +1,6 @@
 package com.example.razvojprogramskihsistemov
 
-import com.example.razvojprogramskihsistemov.ui.calendar.CalendarFragment
+import CalendarFragment
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast

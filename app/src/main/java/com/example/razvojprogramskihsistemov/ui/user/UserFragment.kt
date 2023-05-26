@@ -140,7 +140,7 @@ class UserFragment : Fragment() {
         }
 
         inner class SubjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            private val subjectTextView: TextView = itemView.findViewById(R.id.text_subject)
+            private val subjectTextView: TextView = itemView.findViewById(R.id.nameTextView)
 
             fun bind(subject: String) {
                 subjectTextView.text = subject

@@ -2,6 +2,16 @@
 <resources>
     <string-array name="array_of_subjects">
         <item>Subjects</item>
+        <item>Math</item>
+        <item>English</item>
+        <item>Physics</item>
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>History</item>
+        <item>Music</item>
+        <item>PE</item>
+        <item>German</item>
+        <item>Computer science</item>
         <!-- Add more subjects as needed -->
     </string-array>
 </resources>
