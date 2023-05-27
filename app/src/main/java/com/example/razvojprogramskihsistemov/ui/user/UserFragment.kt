@@ -37,6 +37,7 @@ class UserFragment : Fragment() {
     private lateinit var userManager: UserManager
     private lateinit var navHeaderView: View
     private lateinit var userNameTextView: TextView
+    private lateinit var userSurnameTextView: TextView
     private lateinit var userEmailTextView: TextView
 
     override fun onCreateView(
@@ -68,6 +69,7 @@ class UserFragment : Fragment() {
         val navView = requireActivity().findViewById<NavigationView>(R.id.nav_view)
         navHeaderView = navView.getHeaderView(0)
         userNameTextView = navHeaderView.findViewById(R.id.user_name)
+        userSurnameTextView = navHeaderView.findViewById(R.id.user_surname)
         userEmailTextView = navHeaderView.findViewById(R.id.user_mail)
 
         // Set the hints in the input fields as the user information from the navigation header
@@ -94,19 +96,6 @@ class UserFragment : Fragment() {
             addSubject()
         }
 
-        // Load saved user details
-        val savedUserName = userManager.getUserName()
-        val savedUserEmail = userManager.getUserEmail()
-        userNameTextView.text = savedUserName
-        userEmailTextView.text = savedUserEmail
-        if (savedUserName != null) {
-            nameEditText.setText(savedUserName.split(" ")[0])
-            //surnameEditText.setText(savedUserName.split(" ")[1])
-
-        }
-
-        emailEditText.setText(savedUserEmail)
-
         return root
     }
 
@@ -116,6 +105,7 @@ class UserFragment : Fragment() {
 
         userManager.saveSubjects(subjects)
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -147,8 +137,10 @@ class UserFragment : Fragment() {
         val updatedEmail =
             if (email.isNotBlank()) email else userManager.getUserEmail()
 
-        userNameTextView.text = "$updatedName $updatedSurname"
+        userNameTextView.text = updatedName
+        userSurnameTextView.text = updatedSurname
         userEmailTextView.text = updatedEmail
+
 
         // Save the updated user details
         if (updatedEmail != null) {
@@ -243,6 +235,10 @@ class UserFragment : Fragment() {
 
         fun getUserEmail(): String? {
             return getUserInfo().email
+        }
+
+        fun getUserSurname(): String? {
+            return getUserInfo().surname
         }
     }
 
