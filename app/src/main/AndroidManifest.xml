@@ -13,14 +13,16 @@
         android:theme="@style/Theme.RAZVOJPROGRAMSKIHSISTEMOV"
         tools:targetApi="31">
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".ui.login_register.RegistrationActivity"
+            android:theme="@style/Theme.Material3.Light.NoActionBar"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login_register.LoginActivity"
+            android:theme="@style/Theme.Material3.Light.NoActionBar"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
