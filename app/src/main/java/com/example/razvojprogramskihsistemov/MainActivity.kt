@@ -1,6 +1,7 @@
 package com.example.razvojprogramskihsistemov
 
-import CalendarFragment
+import com.example.razvojprogramskihsistemov.ui.user.UserFragment
+import com.example.razvojprogramskihsistemov.ui.calendar.CalendarFragment
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -12,7 +13,7 @@ import com.example.razvojprogramskihsistemov.databinding.ActivityMainBinding
 import com.example.razvojprogramskihsistemov.ui.dashboard.DashboardFragment
 import com.example.razvojprogramskihsistemov.ui.home.HomeFragment
 import com.example.razvojprogramskihsistemov.ui.notifications.NotificationsFragment
-import com.example.razvojprogramskihsistemov.ui.user.UserFragment
+
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {

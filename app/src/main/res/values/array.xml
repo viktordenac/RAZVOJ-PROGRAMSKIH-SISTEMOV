@@ -14,4 +14,12 @@
         <item>Computer science</item>
         <!-- Add more subjects as needed -->
     </string-array>
+
+    <string-array name="user_subjects">
+        <!-- Existing subjects -->
+        <item>Subjects</item>
+        <item>Math</item>
+        <item>English</item>
+        <!-- Add more existing subjects as needed -->
+    </string-array>
 </resources>
