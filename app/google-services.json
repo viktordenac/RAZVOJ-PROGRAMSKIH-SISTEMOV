@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763554163705",
+    "project_id": "razvoj-programskih-siste-c508d",
+    "storage_bucket": "razvoj-programskih-siste-c508d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763554163705:android:3a287ba3209249052cab28",
+        "android_client_info": {
+          "package_name": "com.example.razvojprogramskihsistemov"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi4QLKXv56jitk3OgPARIWvrfUCgbXDIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
