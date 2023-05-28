@@ -30,6 +30,7 @@
 
     <EditText
         android:id="@+id/edit_name"
+        android:hint="@string/enter_your_name"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
@@ -51,6 +52,7 @@
 
     <EditText
         android:id="@+id/edit_surname"
+        android:hint="@string/enter_your_last_name"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
@@ -72,6 +74,7 @@
 
     <EditText
         android:id="@+id/edit_email"
+        android:hint="Enter your email"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"

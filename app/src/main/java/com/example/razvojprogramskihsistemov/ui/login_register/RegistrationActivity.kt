@@ -19,12 +19,12 @@ import com.google.firebase.auth.FirebaseAuth
 
 class RegistrationActivity : AppCompatActivity() {
 
-    private var editTextEmail: TextInputEditText = TODO()
-    private var editTextPassword: TextInputEditText = TODO()
-    private var buttonRegistration: Button
-    private var auth: FirebaseAuth
-    private var progressBar: ProgressBar
-    private var textView: TextView
+    private lateinit var editTextEmail: TextInputEditText
+    private lateinit var editTextPassword: TextInputEditText
+    private lateinit var buttonRegistration: Button
+    private lateinit var auth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
+    private lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

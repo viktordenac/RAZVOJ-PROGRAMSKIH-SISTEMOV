@@ -14,23 +14,24 @@ import androidx.core.view.isVisible
 import com.example.razvojprogramskihsistemov.MainActivity
 import com.example.razvojprogramskihsistemov.R
 import com.example.razvojprogramskihsistemov.ui.home.HomeFragment
+import com.example.razvojprogramskihsistemov.ui.user.UserFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
-    private var editTextEmail: TextInputEditText = TODO()
-    private var editTextPassword: TextInputEditText = TODO()
-    private var buttonLogin: Button
-    private var auth: FirebaseAuth
-    private var progressBar: ProgressBar
-    private var textView: TextView
+    private lateinit var editTextEmail: TextInputEditText
+    private lateinit var editTextPassword: TextInputEditText
+    private lateinit var buttonLogin: Button
+    private lateinit var auth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
+    private lateinit var textView: TextView
 
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(applicationContext, HomeFragment::class.java)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -78,9 +79,11 @@ class LoginActivity : AppCompatActivity() {
                             "Login successful!",
                             Toast.LENGTH_SHORT,
                         ).show()
-                        val intent = Intent(applicationContext, HomeFragment::class.java)
+
+                        val intent = Intent(applicationContext, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(
@@ -92,7 +95,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
+
+
+
         }
+
 
     }
 }
