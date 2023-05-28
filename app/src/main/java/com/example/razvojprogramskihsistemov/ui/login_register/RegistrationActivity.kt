@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.example.razvojprogramskihsistemov.MainActivity
 import com.example.razvojprogramskihsistemov.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -66,6 +67,11 @@ class RegistrationActivity : AppCompatActivity() {
                             "Account created!",
                             Toast.LENGTH_SHORT,
                         ).show()
+
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
                     } else {
                         progressBar.isGone
                         // If sign in fails, display a message to the user.
