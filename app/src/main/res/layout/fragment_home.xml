@@ -11,6 +11,18 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <EditText
+            android:id="@+id/schedule_input"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@drawable/edittext_background"
+            android:hint="@string/enter_your_schedule"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp"/>
+
         <TextView
             android:id="@+id/monday_textview"
             android:layout_width="match_parent"
@@ -19,8 +31,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="16dp"
-            android:background="@drawable/day_background"
-            android:textColor="@android:color/white" />
+            android:background="@drawable/textview_selector"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tuesday_textview"
@@ -30,8 +42,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="16dp"
-            android:background="@drawable/day_background"
-            android:textColor="@android:color/white" />
+            android:background="@drawable/textview_selector"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/wednesday_textview"
@@ -41,8 +53,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="16dp"
-            android:background="@drawable/day_background"
-            android:textColor="@android:color/white" />
+            android:background="@drawable/textview_selector"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/thursday_textview"
@@ -52,8 +64,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="16dp"
-            android:background="@drawable/day_background"
-            android:textColor="@android:color/white" />
+            android:background="@drawable/textview_selector"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/friday_textview"
@@ -63,8 +75,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="16dp"
-            android:background="@drawable/day_background"
-            android:textColor="@android:color/white" />
+            android:background="@drawable/textview_selector"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/submit_button"
@@ -73,7 +85,8 @@
             android:text="@string/submit"
             android:textSize="18sp"
             android:background="@drawable/submit_button_background"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 
