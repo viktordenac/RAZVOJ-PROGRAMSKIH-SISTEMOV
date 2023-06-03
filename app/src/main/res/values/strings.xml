@@ -37,4 +37,7 @@
     <string name="click_to_register">Click to register</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="enter_your_last_name">Enter your last name</string>
+    <string name="default_value">DEFAULT VALUE</string>
+    <string name="date">Date</string>
+    <string name="assigned_subjects">Assigned Subjects</string>
 </resources>

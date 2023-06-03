@@ -55,12 +55,18 @@ class CalendarFragment : Fragment() {
 
         // Set up the RecyclerView for selected subjects
         selectedSubjectsRecyclerView = rootView.findViewById(R.id.selectedSubjectsRecyclerView)
-        selectedSubjectsAdapter = SelectedSubjectsAdapter(selectedSubjects)
+        selectedSubjectsAdapter = SelectedSubjectsAdapter(
+            selectedSubjects,
+            onDeleteSubject = { subject -> deleteSubject(subject) },
+            onDeleteDate = { date -> deleteDate(date) }
+        )
         selectedSubjectsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         selectedSubjectsRecyclerView.adapter = selectedSubjectsAdapter
 
+
         // Restore selected subjects from SharedPreferences
         restoreSelectedSubjects()
+
 
         // Set an event listener to handle date selection
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -73,7 +79,7 @@ class CalendarFragment : Fragment() {
 
                 if (isDuplicateSubject(subject)) {
                     // Show a notification that the subject already exists for the selected date
-                    Toast.makeText(requireContext(), "com.example.razvojprogramskihsistemov.ui.calendar.Subject already set for this date", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Subject already set for this date", Toast.LENGTH_SHORT).show()
                 } else {
                     selectedSubjects.add(subject)
                     selectedSubjectsAdapter.notifyItemInserted(selectedSubjects.size - 1)
@@ -85,6 +91,24 @@ class CalendarFragment : Fragment() {
 
         return rootView
     }
+
+    private fun deleteSubject(subject: Subject) {
+        selectedSubjects.remove(subject)
+        selectedSubjectsAdapter.notifyDataSetChanged()
+        selectedSubjectsAdapter.updateGroupedSubjects()
+        saveSelectedSubjects()
+        Toast.makeText(requireContext(), "Subject deleted", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun deleteDate(date: String) {
+        val subjectsToRemove = selectedSubjects.filter { it.date == date }
+        selectedSubjects.removeAll(subjectsToRemove)
+        selectedSubjectsAdapter.notifyDataSetChanged()
+        selectedSubjectsAdapter.updateGroupedSubjects()
+        saveSelectedSubjects()
+        Toast.makeText(requireContext(), "Date and subjects deleted", Toast.LENGTH_SHORT).show()
+    }
+
 
     private fun isDuplicateSubject(subject: Subject): Boolean {
         // Check if the subject already exists in the selectedSubjects list
@@ -116,14 +140,85 @@ class CalendarFragment : Fragment() {
 
 data class Subject(val date: String, val name: String)
 
-class SelectedSubjectsAdapter(private val subjects: List<Subject>) :
-    RecyclerView.Adapter<SelectedSubjectsAdapter.SubjectViewHolder>() {
+class SelectedSubjectsAdapter(
+    private val subjects: List<Subject>,
+    private val onDeleteSubject: (Subject) -> Unit,
+    private val onDeleteDate: (String) -> Unit
+) : RecyclerView.Adapter<SelectedSubjectsAdapter.SubjectViewHolder>() {
 
     private var groupedSubjects: Map<String, List<Subject>> = emptyMap() // Initialize as an empty map
 
-    class SubjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val dateTextView: TextView = itemView.findViewById(R.id.dateTextView)
-        val nameTextView: TextView = itemView.findViewById(R.id.assignedSubjectText)
+    inner class SubjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val dateTextView1: TextView = itemView.findViewById(R.id.dateTextView1)
+        val assignedSubjectText1: TextView = itemView.findViewById(R.id.assignedSubjectText1)
+        val dateTextView2: TextView = itemView.findViewById(R.id.dateTextView2)
+        val assignedSubjectText2: TextView = itemView.findViewById(R.id.assignedSubjectText2)
+        val dateTextView3: TextView = itemView.findViewById(R.id.dateTextView3)
+        val assignedSubjectText3: TextView = itemView.findViewById(R.id.assignedSubjectText3)
+
+        init {
+            // Set long click listener for the item view
+            itemView.setOnLongClickListener {
+                val position = adapterPosition
+                val subject = subjects[position]
+                onDeleteSubject(subject)
+                true
+            }
+
+            // Set long click listener for the date text view
+            dateTextView1.setOnLongClickListener {
+                val position = adapterPosition
+                val date = groupedSubjects.keys.toList().getOrNull(position * 3)
+                date?.let { onDeleteDate(it) }
+                true
+            }
+
+            // Set long click listener for the assigned subject text view
+            assignedSubjectText1.setOnLongClickListener {
+                val position = adapterPosition
+                val date = groupedSubjects.keys.toList().getOrNull(position * 3)
+                val subjectIndex = 0
+                val subject = groupedSubjects[date]?.getOrNull(subjectIndex)
+                subject?.let { onDeleteSubject(it) }
+                true
+            }
+
+            // Set long click listener for dateTextView2
+            dateTextView2.setOnLongClickListener {
+                val position = adapterPosition
+                val date = groupedSubjects.keys.toList().getOrNull((position * 3) + 1)
+                date?.let { onDeleteDate(it) }
+                true
+            }
+
+            // Set long click listener for assignedSubjectText2
+            assignedSubjectText2.setOnLongClickListener {
+                val position = adapterPosition
+                val date = groupedSubjects.keys.toList().getOrNull((position * 3) + 1)
+                val subjectIndex = 0
+                val subject = groupedSubjects[date]?.getOrNull(subjectIndex)
+                subject?.let { onDeleteSubject(it) }
+                true
+            }
+
+            // Set long click listener for dateTextView3
+            dateTextView3.setOnLongClickListener {
+                val position = adapterPosition
+                val date = groupedSubjects.keys.toList().getOrNull((position * 3) + 2)
+                date?.let { onDeleteDate(it) }
+                true
+            }
+
+            // Set long click listener for assignedSubjectText3
+            assignedSubjectText3.setOnLongClickListener {
+                val position = adapterPosition
+                val date = groupedSubjects.keys.toList().getOrNull((position * 3) + 2)
+                val subjectIndex = 0
+                val subject = groupedSubjects[date]?.getOrNull(subjectIndex)
+                subject?.let { onDeleteSubject(it) }
+                true
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
@@ -133,26 +228,76 @@ class SelectedSubjectsAdapter(private val subjects: List<Subject>) :
     }
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position: Int) {
-        val date = groupedSubjects.keys.elementAt(position)
-        val subjectsForDate = groupedSubjects[date]
+        val dateList = groupedSubjects.keys.toList()
+        val startIndex = position * 3
 
-        holder.dateTextView.text = date
-        holder.nameTextView.text = subjectsForDate?.joinToString(", ") { it.name }
+        if (startIndex < dateList.size) {
+            val date1 = dateList[startIndex]
+            val subjects1 = groupedSubjects[date1]
+
+            holder.dateTextView1.text = date1
+            holder.assignedSubjectText1.text = getSubjectsText(subjects1)
+
+            holder.dateTextView1.visibility = View.VISIBLE
+            holder.assignedSubjectText1.visibility = View.VISIBLE
+
+            holder.itemView.visibility = View.VISIBLE
+        } else {
+            holder.itemView.visibility = View.GONE
+        }
+
+        // Set visibility and values for dateTextView2, assignedSubjectText2, dateTextView3, assignedSubjectText3
+        val date2 = dateList.getOrNull(startIndex + 1)
+        val subjects2 = groupedSubjects[date2]
+        if (date2 != null && subjects2 != null) {
+            holder.dateTextView2.text = date2
+            holder.assignedSubjectText2.text = getSubjectsText(subjects2)
+
+            holder.dateTextView2.visibility = View.VISIBLE
+            holder.assignedSubjectText2.visibility = View.VISIBLE
+        } else {
+            holder.dateTextView2.visibility = View.GONE
+            holder.assignedSubjectText2.visibility = View.GONE
+        }
+
+        val date3 = dateList.getOrNull(startIndex + 2)
+        val subjects3 = groupedSubjects[date3]
+        if (date3 != null && subjects3 != null) {
+            holder.dateTextView3.text = date3
+            holder.assignedSubjectText3.text = getSubjectsText(subjects3)
+
+            holder.dateTextView3.visibility = View.VISIBLE
+            holder.assignedSubjectText3.visibility = View.VISIBLE
+        } else {
+            holder.dateTextView3.visibility = View.GONE
+            holder.assignedSubjectText3.visibility = View.GONE
+        }
+
     }
 
+    private fun getSubjectsText(subjects: List<Subject>?): String {
+        return subjects?.joinToString("\n") { it.name } ?: ""
+    }
+
+
     override fun getItemCount(): Int {
-        return groupedSubjects.size
+        val dateSize = groupedSubjects.size
+        val maxSubjects = dateSize * 3
+        return if (maxSubjects > subjects.size) dateSize else (subjects.size + 2) / 3
     }
 
     fun updateGroupedSubjects() {
-        groupedSubjects = subjects.groupBy { it.date }
-        groupedSubjects = groupedSubjects.toSortedMap(compareBy { convertToDate(it) }) // Sort by date
+        groupedSubjects = subjects.sortedBy { formatDate(it.date) }.groupBy { formatDate(it.date) }
         notifyDataSetChanged()
     }
 
-    private fun convertToDate(dateString: String): Date {
-        val format = if (dateString.contains("/")) "dd/MM/yyyy" else "d/M/yyyy"
-        val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
-        return simpleDateFormat.parse(dateString)!!
+    private fun formatDate(dateString: String): String {
+        val inputFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val date = inputFormat.parse(dateString)
+        return outputFormat.format(date)
     }
+
+
+
 }

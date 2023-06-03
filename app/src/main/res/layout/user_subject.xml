@@ -5,6 +5,7 @@
 
     <TextView
         android:id="@+id/subjectText"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

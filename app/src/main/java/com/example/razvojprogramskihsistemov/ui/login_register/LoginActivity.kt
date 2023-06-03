@@ -68,6 +68,8 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show()
             }
 
+
+
             auth.signInWithEmailAndPassword(email.toString(), password.toString())
                 .addOnCompleteListener(this) { task ->
 

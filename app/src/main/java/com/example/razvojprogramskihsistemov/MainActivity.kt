@@ -21,8 +21,11 @@ import com.example.razvojprogramskihsistemov.ui.login_register.RegistrationActiv
 import com.example.razvojprogramskihsistemov.ui.notifications.NotificationsFragment
 
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,11 +40,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userEmailTextView: TextView
 
     private lateinit var auth: FirebaseAuth
+    val firebase: DatabaseReference = FirebaseDatabase.getInstance().getReference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //FirebaseApp.initializeApp(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val database = FirebaseDatabase.getInstance()
+        val dbRefSubjects = database.getReference("Subjects")
+
+        FirebaseApp.initializeApp(this)
 
         drawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -68,8 +78,9 @@ class MainActivity : AppCompatActivity() {
         userEmailTextView = navHeaderView.findViewById(R.id.user_mail)
 
         // Get the saved user details
+        val currentUser = FirebaseAuth.getInstance().currentUser
         val savedUserName = userManager.getUserName()
-        val savedUserEmail = userManager.getUserEmail()
+        val savedUserEmail = currentUser?.email
 
         // Update the user information in the navigation header
         userNameTextView.text = savedUserName
@@ -79,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         val userInfo = userManager.getUserInfo()
         val userName = userInfo.name
         val userSurname = userInfo.surname
-        val userEmail = userInfo.email
 
         if (userName != null) {
             userNameTextView.hint = if (userName.isNotBlank()) userName else ""
@@ -87,11 +97,7 @@ class MainActivity : AppCompatActivity() {
 
         if (userSurname != null) {
 
-            userSurnameTextView.hint = if (userSurname.isNotBlank()) userSurname else "Not logged in"
-        }
-
-        if (userEmail != null) {
-            userEmailTextView.hint = if (userEmail.isNotBlank()) userEmail else ""
+            userSurnameTextView.hint = if (userSurname.isNotBlank()) userSurname else ""
         }
 
         navView.setNavigationItemSelectedListener { menuItem ->
@@ -115,9 +121,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
-
     }
 
     private fun replaceFragment(fragment: Fragment, title: String) {
@@ -128,7 +131,6 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.closeDrawers()
         setTitle(title)
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return toggle.onOptionsItemSelected(item)
