@@ -39,4 +39,6 @@
     <string name="default_value">DEFAULT VALUE</string>
     <string name="date">Date</string>
     <string name="assigned_subjects">Assigned Subjects</string>
+    <string name="note">Note</string>
+    <string name="my_note">My note</string>
 </resources>

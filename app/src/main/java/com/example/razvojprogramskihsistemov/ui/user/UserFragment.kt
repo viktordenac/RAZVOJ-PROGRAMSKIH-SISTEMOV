@@ -152,9 +152,11 @@ class UserFragment : Fragment() {
 
                 userNameTextView.text = name
                 nameEditText.hint = if (name.isNotBlank()) name else "Enter your name"
+                nameEditText.setText(name)
 
                 userSurnameTextView.text = surname
                 surnameEditText.hint = if (surname.isNotBlank()) surname else "Enter your surname"
+                surnameEditText.setText(surname)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -166,51 +168,30 @@ class UserFragment : Fragment() {
         })
     }
 
+
+
     private fun submitUserDetails() {
         val name = nameEditText.text.toString()
         val surname = surnameEditText.text.toString()
 
-        val originalName = userManager.getUserName()
-        val originalSurname = userManager.getUserSurname()
-
-        if (name == originalName && surname == originalSurname) {
-            // No changes were made, so no need to update the details
-            Toast.makeText(requireContext(), "No changes were made", Toast.LENGTH_SHORT).show()
-            return
-        }
-
         // Update the user name and email in the navigation header
-        val updatedName = if (name.isNotBlank()) name else originalName
-        val updatedSurname = if (surname.isNotBlank()) surname else originalSurname
+        userNameTextView.text = name
+        userSurnameTextView.text = surname
 
-        userNameTextView.text = updatedName
-        userSurnameTextView.text = updatedSurname
-
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        currentUser?.uid?.let { userId ->
-            // Save the updated user details to Firebase Realtime Database
-            val userMap = HashMap<String, String?>()
-            userMap["name"] = updatedName
-            userMap["surname"] = updatedSurname
-
-            dbRefUser.updateChildren(userMap as Map<String, Any>)
-                .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "User details updated", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { err ->
-                    Toast.makeText(requireContext(), "Error: ${err.message}", Toast.LENGTH_SHORT).show()
-                }
-        }
+        // Save the updated user details
+        userManager.saveUserDetails(name, surname)
 
         // Update the hints in the input fields based on the new user information
-        nameEditText.hint = updatedName
-        surnameEditText.hint = updatedSurname
+        nameEditText.hint = name
+        surnameEditText.hint = surname
 
         // Clear the input fields
         nameEditText.text.clear()
         surnameEditText.text.clear()
         emailEditText.text.clear()
     }
+
+
 
 
     private fun addSubject() {
